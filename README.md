@@ -1,4 +1,4 @@
-****************************  Cumulative Points Calculator Website *******************************
+******** Cumulative Points Calculator Website *********
 Author: Paul To (Tô Văn Hưởng)
 Tech: Figma (Design UI), ReactJS - TailwindCSS (Front-End), Firebase (Back-End)
 Date: 13 December 2023 
@@ -15,4 +15,4 @@ Figma Link: https://www.figma.com/file/jLe4LiJwSDPkAPVz7VqQz4/ScoreCalculatingUI
   With ReactJS driving the front-end, users can expect interactive components and smooth navigation, while Tailwind CSS facilitates a sleek and customizable design.
   The use of Firebase for the back-end enables seamless integration of user authentication, data storage, and retrieval, guaranteeing a robust and reliable foundation for the website's operations.
   
-********************************************* Happy Coding (ハッピーコーディング) ************************************************** 
+ Happy Coding (ハッピーコーディング) 
