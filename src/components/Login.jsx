@@ -64,7 +64,7 @@ const Login = () => {
         </div>
       </div>
       <div className={`absolute ${window.innerWidth < 836 ? "bottom-5" : "bottom-0"} left-[50%] translate-x-[-50%] text-white`}>
-        <p>Designed by Paul @2023</p>
+        <p className="text-sm sm:text-xl">Designed by Paul @2023</p>
       </div>
     </div>
   );
