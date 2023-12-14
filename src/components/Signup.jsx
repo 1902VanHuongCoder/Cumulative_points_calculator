@@ -15,17 +15,17 @@ const Signup = () => {
           }')`,
         }}
       >
-        <div className="w-[320px] sm:w-[440px] h-[500px] sm:h-[660px] bg-white shadow-md p-8 sm:p-10 rounded-md">
-          <h1 className="text-[32px] font-[800] w-full h-[61px] sm:h-[80px] flex justify-center items-center">
+        <div className="h-[400px] w-[300px] py-[15px] px-[25px] sm:h-[470px] sm:w-[350px] flex flex-col justify-evenly bg-white sm:py-5 sm:px-10 rounded-md shadow-lg">
+          <h1 className="text-[26px] font-bold h-[40px] sm:text-[32px] sm:font-[800] w-full flex justify-center items-center">
             Sign Up
           </h1>
           <form
             action=""
-            method="POST" 
-            className="h-[300px] sm:h-[400px] flex flex-col justify-evenly items-center"
+            method="POST"
+            className="h-[260px] flex flex-col justify-evenly items-start"
           >
-            <div className="w-full border-b-2 border-rgba(0,0,0,1) border-solid py-2">
-              <div className="mb-2 text-[14px]">Username</div>
+            <div className="w-full border-b-[1px] border-rgba(0,0,0,1) border-solid py-2">
+              <div className="mb-2 text-[12px]">Username</div>
               <div className="flex gap-x-2">
                 <CiUser className="text-[20px] opacity-50" />
                 <input
@@ -35,9 +35,10 @@ const Signup = () => {
                 />
               </div>
             </div>
+            <small className="text-red-500">Email isn`t invalid!</small>
 
-            <div className="w-full border-b-2 border-rgba(0,0,0,1) border-solid py-2">
-              <div className="mb-2 text-[14px]">Password</div>
+            <div className="w-full border-b-[1px] border-rgba(0,0,0,1) border-solid py-2">
+              <div className="mb-2 text-[12px]">Password</div>
               <div className="flex gap-x-2">
                 <IoLockClosedOutline className="text-[20px] opacity-50" />
                 <input
@@ -47,9 +48,10 @@ const Signup = () => {
                 />
               </div>
             </div>
+            {/* <small className="text-red-500">Email isn`t invalid!</small> */}
 
-            <div className="w-full border-b-2 border-rgba(0,0,0,1) border-solid py-2">
-              <div className="mb-2 text-[14px]">Confirm Password</div>
+            <div className="w-full border-b-[1px] border-rgba(0,0,0,1) border-solid py-2">
+              <div className="mb-2 text-[12px]">Confirm Password</div>
               <div className="flex gap-x-2">
                 <MdLockOutline className="text-[20px] opacity-50" />
                 <input
@@ -59,10 +61,12 @@ const Signup = () => {
                 />
               </div>
             </div>
+            {/* <small className="text-red-500">Email isn`t invalid!</small> */}
+            
           </form>
 
-          <div className="h-[85px] sm:h-[100px] flex flex-col justify-center gap-y-4 items-center">
-            <button className="w-full bg-gradient-to-r from-[rgba(0, 255, 255, 0.55)] to-[rgba(255, 0, 122, 0.82)] py-3 sm:py-5 uppercase font-bold text-white text-[16px] rounded-full hover:opacity-80">
+          <div className="h-[100px] flex flex-col justify-end gap-y-2 items-center">
+            <button className="w-full bg-gradient-to-r from-[rgba(0, 255, 255, 0.55)] to-[rgba(255, 0, 122, 0.82)] py-3 uppercase font-bold text-white text-[16px] rounded-full hover:opacity-80">
               sign up
             </button>
             <p>
@@ -74,8 +78,10 @@ const Signup = () => {
           </div>
         </div>
       </div>
-      <div className={`absolute ${window.innerWidth < 836 ? "bottom-5" : "bottom-0"} left-[50%] translate-x-[-50%] text-white`}>
-        <p>Designed by Paul @2023</p>
+      <div
+        className={`absolute bottom-1 left-[50%] translate-x-[-50%] text-white`}
+      >
+        <p className="text-[12px]">Designed by Paul @2023</p>
       </div>
     </div>
   );
