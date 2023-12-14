@@ -46,9 +46,9 @@ const Greeting = () => {
           </p>
         </div>
 
-        <button className="w-[170px] h-[50px] bg-gradient-to-r from-[rgba(0, 255, 255, 0.55)] to-[rgba(255, 0, 122, 0.82)] py-3 font-bold text-white text-[16px] rounded-full hover:opacity-80 shadow-md">
+        <a href="/" className="w-[170px] h-[50px] bg-gradient-to-r from-[rgba(0, 255, 255, 0.55)] to-[rgba(255, 0, 122, 0.82)] py-3 font-bold text-white text-[16px] rounded-full hover:opacity-80 shadow-md text-center">
           GET STARTED
-        </button>
+        </a>
       </div>
       <div
         className={`absolute bottom-1 left-[50%] translate-x-[-50%] text-white`}
