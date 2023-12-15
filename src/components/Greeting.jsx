@@ -1,24 +1,9 @@
-// import React from 'react'
 import GreetingBgDesktop from "../assets/GreetingBgPNGDesktop.png";
 import GreetingBgTablet from "../assets/GreetingBgPNGTablet.png";
 import logo from "../assets/logo.png";
 console.log(window.innerHeight);
 console.log(window.innerWidth);
 const Greeting = () => {
-  /*
-    width: 120px;
-    height: 120px;
-
-    font-size: 40px;
-    line-height: 50px;
-
-    font-size: 24px;
-    height: 64px;
-    width: 250px;
-
-    font-size: 14px;
-    */
-
   return (
     <div className="relative w-full h-screen overflow-hidden bg-gradient-to-tr from-cyan-300 to-pink-600">
       <div

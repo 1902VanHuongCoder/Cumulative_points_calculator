@@ -1,5 +1,4 @@
 import BackgroundRectangle from "../assets/BackgroundRectangle.png";
-import BgTablet from "../assets/BackgroundRectangleTablet.png";
 import { CiUser } from "react-icons/ci";
 
 import { IoLockClosedOutline } from "react-icons/io5";
@@ -9,9 +8,7 @@ const Signup = () => {
       <div
         className="w-full h-full bg-cover bg-no-repeat flex justify-center items-center"
         style={{
-          backgroundImage: `url('${
-            window.innerWidth > 834 ? BackgroundRectangle : BgTablet
-          }')`,
+          backgroundImage: `url('${BackgroundRectangle}')`,
         }}
       >
         <div className="h-[400px] w-[300px] py-[15px] px-[25px] sm:h-[440px] sm:w-[350px] flex flex-col justify-evenly bg-white sm:py-5 sm:px-10 rounded-md shadow-lg">
@@ -34,7 +31,7 @@ const Signup = () => {
                 />
               </div>
             </div>
-            <small className="text-red-500">Email isn`t invalid!</small>
+            <small className="text-red-500 text-[16px]">Email isn`t invalid!</small>
 
             <div className="w-full border-b-[1px] border-rgba(0,0,0,1) border-solid py-2">
               <div className="mb-2 text-[12px]">Password</div>
@@ -47,9 +44,14 @@ const Signup = () => {
                 />
               </div>
             </div>
-            {/* <small className="text-red-500">Email isn`t invalid!</small> */}
+            <small className="text-red-500 text-[16px]">Email isn`t invalid!</small>
             <div className="w-full text-right">
-              <a className="text-[14px] underline text-[#0E7CFC]" href="/forgotpass">Forgot password?</a>
+              <a
+                className="text-[14px] underline text-[#0E7CFC]"
+                href="/forgotpass"
+              >
+                Forgot password?
+              </a>
             </div>
           </form>
 
@@ -58,7 +60,7 @@ const Signup = () => {
               LOGIN
             </button>
             <p>
-              <span>Or</span>{" "}
+              <span>or</span>{" "}
               <a href="/signup" className="underline text-[#0E7CFC]">
                 Sign up
               </a>

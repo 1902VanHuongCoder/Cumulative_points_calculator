@@ -1,21 +1,18 @@
 import BackgroundRectangle from "../assets/BackgroundRectangle.png";
-import BgTablet from "../assets/BackgroundRectangleTablet.png";
 import { CiUser } from "react-icons/ci";
-
 import { IoLockClosedOutline } from "react-icons/io5";
 import { MdLockOutline } from "react-icons/md";
+
 const Signup = () => {
   return (
     <div className="relative w-full h-screen overflow-hidden bg-gradient-to-tr from-cyan-300 to-pink-600">
       <div
         className="w-full h-full bg-cover bg-no-repeat flex justify-center items-center"
         style={{
-          backgroundImage: `url('${
-            window.innerWidth > 834 ? BackgroundRectangle : BgTablet
-          }')`,
+          backgroundImage: `url('${BackgroundRectangle}')`,
         }}
       >
-        <div className="h-[400px] w-[300px] py-[15px] px-[25px] sm:h-[470px] sm:w-[350px] flex flex-col justify-evenly bg-white sm:py-5 sm:px-10 rounded-md shadow-lg">
+        <div className="h-[460px] w-[300px] py-[15px] px-[25px] sm:h-[470px] sm:w-[350px] flex flex-col justify-evenly bg-white sm:py-5 sm:px-10 rounded-md shadow-lg">
           <h1 className="text-[26px] font-bold h-[40px] sm:text-[32px] sm:font-[800] w-full flex justify-center items-center">
             Sign Up
           </h1>
@@ -35,7 +32,9 @@ const Signup = () => {
                 />
               </div>
             </div>
-            <small className="text-red-500">Email isn`t invalid!</small>
+            <small className="text-[#ff0000] text-[16px]">
+              Email isn`t invalid!
+            </small>
 
             <div className="w-full border-b-[1px] border-rgba(0,0,0,1) border-solid py-2">
               <div className="mb-2 text-[12px]">Password</div>
@@ -48,7 +47,9 @@ const Signup = () => {
                 />
               </div>
             </div>
-            {/* <small className="text-red-500">Email isn`t invalid!</small> */}
+            <small className="text-[#ff0000] text-[16px]">
+              Email isn`t invalid!
+            </small>
 
             <div className="w-full border-b-[1px] border-rgba(0,0,0,1) border-solid py-2">
               <div className="mb-2 text-[12px]">Confirm Password</div>
@@ -61,8 +62,9 @@ const Signup = () => {
                 />
               </div>
             </div>
-            {/* <small className="text-red-500">Email isn`t invalid!</small> */}
-            
+            <small className="text-[#ff0000] text-[16px]">
+              Email isn`t invalid!
+            </small>
           </form>
 
           <div className="h-[100px] flex flex-col justify-end gap-y-2 items-center">
@@ -70,7 +72,7 @@ const Signup = () => {
               sign up
             </button>
             <p>
-              <span>Or</span>{" "}
+              <span>or</span>{" "}
               <a href="/login" className="underline text-[#0E7CFC]">
                 Login
               </a>
