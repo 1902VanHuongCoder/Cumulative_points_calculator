@@ -4,8 +4,6 @@ import { useContext } from "react";
 import { SidebarContext } from "../../contexts/sidbarContext";
 const Sidebar = () => {
   const { isOpen, setIsOpen } = useContext(SidebarContext);
-
-  console.log(isOpen);
   return (
     <div
       className={`fixed top-0 w-4/5 h-screen overflow-hidden bg-slate-700 py-20 px-5 transition-all duration-500 ${

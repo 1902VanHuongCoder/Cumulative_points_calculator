@@ -7,9 +7,16 @@ import { FaRegWindowClose } from "react-icons/fa";
 import { FaPenToSquare } from "react-icons/fa6";
 import Navbar from "./default_components/Navbar";
 import Sidebar from "./default_components/Sidebar";
+import { useContext } from "react";
+import { NotificationsContext } from "../contexts/notificationContext";
 const subjectList = [1, 2, 3, 4, 5];
 const Home = () => {
- 
+  const { setIsShow, setContent, setType } = useContext(NotificationsContext);
+  const testNotify = () => {
+    setContent("Add success fulllyy!");
+    setType("success");
+    setIsShow(true);
+  };
   return (
     <div className="relative w-full min-h-screen overflow-scroll lg:h-screen lg:overflow-hidden bg-gradient-to-tr from-cyan-300 to-pink-600">
       <div
@@ -46,7 +53,7 @@ const Home = () => {
                   {subjectList.map((item, index) => {
                     return (
                       <ul
-                        data-aos={item % 2 === 0 ? "fade-right" : "fade-left"}
+                        data-aos="flip-down"
                         key={index}
                         className={`h-[60px] ${
                           item % 2 === 0
@@ -100,7 +107,10 @@ const Home = () => {
               </div>
             </div>
             <div className={`w-full lg:w-1/3 flex flex-col gap-y-5`}>
-              <div data-aos="fade-up" className="flex flex-col items-center gap-y-5">
+              <div
+                data-aos="fade-up"
+                className="flex flex-col items-center gap-y-5"
+              >
                 <div
                   className="w-[200px] h-[200px] rounded-full flex justify-center items-center"
                   style={{
@@ -116,7 +126,10 @@ const Home = () => {
                   rating
                 </p>
               </div>
-              <div data-aos="fade-up" className="px-5 flex flex-col gap-y-2 text-white">
+              <div
+                data-aos="fade-up"
+                className="px-5 flex flex-col gap-y-2 text-white"
+              >
                 <h2 className="w-full py-2 text-[20px]">Notifications</h2>
                 <p className="text-[12px]">
                   This website is being finalized, so if you have any feedback,

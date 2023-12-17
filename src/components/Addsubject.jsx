@@ -2,14 +2,16 @@ import GreetingBgPNGDesktop from "../assets/GreetingBgPNGDesktop.png";
 import SelectArrowUp from "../assets/SelectArrowUp.png";
 import SelectArrowDown from "../assets/SelectArrowDown.png";
 import rocketIcon from "../assets/rocket.png";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Navbar from "./default_components/Navbar";
 import Footer from "./default_components/Footer";
 import Sidebar from "./default_components/Sidebar";
 import { db } from "../firebase_setup/firebase";
 import { addDoc, collection } from "firebase/firestore";
 import { useForm } from "react-hook-form";
+import { LoadingContext } from "../contexts/loadingContext";
 const Addsubject = () => {
+  const { setIsLoading } = useContext(LoadingContext);
   const {
     register,
     handleSubmit,
@@ -20,18 +22,31 @@ const Addsubject = () => {
   const [yearDropdownIsOpen, setYearDropDownIsOpen] = useState(false);
 
   const handleAddSubject = async (data) => {
-
+    let subjectCode = data.subject_code.toUpperCase();
+    let score = data.score.toUpperCase();
+    let state = true;
+    setIsLoading(true);
+    try {
       await addDoc(collection(db, "subjects"), {
         no_cre: data.no_cre,
-        score: data.score,
+        score: score,
         semester: data.semester,
-        subject_code: data.subject_code,
+        subject_code: subjectCode,
         subject_name: data.subject_name,
         year: data.year,
+        prerequisite: data.prerequisite,
+        physicalEducation: data.physicaledu,
       });
-
-    alert("Adding product is successful");
-    reset();
+    } catch (error) {
+      state = false;
+      console.log("Unable to add subjects");
+    }
+    if (state) {
+      reset();
+      setIsLoading(false);
+    } else {
+      alert("Adding product is not successful");
+    }
   };
   return (
     <div className="relative w-full min-h-screen bg-gradient-to-tr from-cyan-300 to-pink-600">
@@ -57,7 +72,9 @@ const Addsubject = () => {
                   name="subject_name"
                   id="subject_name"
                   maxLength={40}
-                  {...register("subject_name", { required: "This field is required!" })}
+                  {...register("subject_name", {
+                    required: "This field is required!",
+                  })}
                   type="text"
                   className="h-[40px] w-full outline-none bg-white border-[1px] border-solid border-[rgba(0,0,0,.5)] px-5 text-black rounded-sm focus:border-[rgba(0,0,0,1)]"
                 />
@@ -181,6 +198,9 @@ const Addsubject = () => {
                     backgroundPosition: `95% 50%`,
                   }}
                 >
+                 <option value="2021 - 2022" className="text-black">
+                    2021 - 2022
+                  </option>
                   <option value="2022 - 2023" className="text-black">
                     2022 - 2023
                   </option>
@@ -194,6 +214,34 @@ const Addsubject = () => {
                     2025 - 2026
                   </option>
                 </select>
+              </div>
+            </div>
+            <div className="flex gap-x-5">
+              <div className="flex items-center gap-x-2">
+                <input
+                  className="h-5 w-5"
+                  type="checkbox"
+                  name="prerequisite"
+                  id="prerequisite"
+                  {...register("prerequisite")}
+                />
+                <label htmlFor="prerequisite" className="text-white">
+                  {" "}
+                  Prerequisite <span className="text-red-500">*</span>
+                </label>
+              </div>
+              <div className="flex items-center gap-x-2">
+                <input
+                  className="h-5 w-5"
+                  type="checkbox"
+                  name="physicaledu"
+                  id="physicaledu"
+                  {...register("physicaledu")}
+                />
+                <label htmlFor="physicaledu" className="text-white">
+                  {" "}
+                  Physical education <span className="text-red-500">*</span>
+                </label>
               </div>
             </div>
           </div>
