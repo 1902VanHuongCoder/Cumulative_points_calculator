@@ -1,6 +1,7 @@
 import GreetingBgDesktop from "../assets/GreetingBgPNGDesktop.png";
 import GreetingBgTablet from "../assets/GreetingBgPNGTablet.png";
 import logo from "../assets/logo.png";
+import Footer from "./default_components/Footer";
 console.log(window.innerHeight);
 console.log(window.innerWidth);
 const Greeting = () => {
@@ -35,11 +36,7 @@ const Greeting = () => {
           GET STARTED
         </a>
       </div>
-      <div
-        className={`absolute bottom-1 left-[50%] translate-x-[-50%] text-white`}
-      >
-        <p className="text-[12px]">Designed by Paul @2023</p>
-      </div>
+      <Footer />
     </div>
   );
 };

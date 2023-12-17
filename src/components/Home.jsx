@@ -3,64 +3,85 @@ import githubIcon from "../assets/githubicon.png";
 import instagramIcon from "../assets/instagramIcon.png";
 import facebookIcon from "../assets/facebookIcon.png";
 import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from "react-icons/fa";
-import logo from "../assets/logo.png";
+import { FaRegWindowClose } from "react-icons/fa";
+import { FaPenToSquare } from "react-icons/fa6";
+import Navbar from "./default_components/Navbar";
+import Sidebar from "./default_components/Sidebar";
 const subjectList = [1, 2, 3, 4, 5];
 const Home = () => {
   return (
-    <div className="relative w-full min-h-screen sm:h-screen sm:overflow-hidden bg-gradient-to-tr from-cyan-300 to-pink-600">
+    <div className="relative w-full min-h-screen overflow-scroll lg:h-screen lg:overflow-hidden bg-gradient-to-tr from-cyan-300 to-pink-600">
       <div
         className="w-full h-full bg-repeat"
         style={{ backgroundImage: `url('${SquaresBgPNG}')` }}
       >
-        <div className="w-full h-[80px] bg-transparent backdrop-blur-sm flex gap-x-6 sm:gap-x-10 items-center px-6 sm:px-10">
-          <img
-            src={logo}
-            alt="logo"
-            className="w-[40px] h-[30px] self-center"
-          />
-          <ul className="flex gap-x-10 items-center font-bold text-white">
-            <li>
-              <a href="/addsubject">Add Subject</a>
-            </li>
-            <li>
-              <a href="/gpa">GPA</a>
-            </li>
-          </ul>
-        </div>
-        <div className={`w-full h-['${window.innerHeight - 60}px'] flex justify-center items-center`}>
-          <div className="w-full sm:flex">
-            <div className={`w-full sm:w-2/3 h-fit mb-16 sm:mb-0`}>
-              <div className="w-[90%] mx-auto">
-                <ul className="flex justify-evenly font-bold text-white px-1 text-center text-[12px] sm:text-[14px] mb-3">
-                  <li className="basis-[12%]">STT</li>
-                  <li className="basis-[34%]">Subject Name</li>
-                  <li className="basis-[14%]">No. Cre</li>
-                  <li className="basis-[12%] text-left">Score</li>
-                  <li className="basis-[20%] text-left">Semester</li>
-                  <li className="basis-[18%] text-left">Year</li>
-                </ul>
-                {subjectList.map((item, index) => {
-                  return (
-                    <ul
-                      key={index}
-                      className={`h-[60px] ${
-                        item % 2 === 0
-                          ? "bg-[rgba(0,0,0,.3)] text-white"
-                          : "bg-[rgba(255,255,255,.8)] text-black"
-                      }  flex justify-evenly items-center mb-1 px-2 sm:px-4 text-center text-[12px] sm:text-[14px] rounded-lg`}
-                    >
-                      <li className="basis-[8%]">{item}</li>
-                      <li className="basis-[34%] text-left">
-                        Analyze and Design System
-                      </li>
-                      <li className="basis-[10%]">3</li>
-                      <li className="basis-[10%]">C</li>
-                      <li className="basis-[10%]">1</li>
-                      <li className="basis-[26%]">2023 - 2024</li>
-                    </ul>
-                  );
-                })}
+        <Navbar />
+        <div
+          className={`w-full h-['${
+            window.innerHeight - 60
+          }px'] flex justify-center items-center pb-3 sm:pb-0`}
+        >
+          <div className="w-full lg:flex">
+            <div className={`w-full lg:w-2/3 h-fit mb-16 sm:mb-0`}>
+              <div className="w-[320px] h-[352px] sm:w-full sm:h-fit overflow-scroll sm:overflow-auto  mx-auto px-3">
+                <div className="w-[600px] h-[300px] sm:h-fit sm:w-[95%] mx-auto text-[12px] sm:text-[14px]">
+                  <ul className="text-white w-full flex px-1 lg:px-5 py-2">
+                    <li className="basis-[6%] text-center">STT</li>
+                    <li className="basis-[25%] lg:basis-[36%] text-center">
+                      Subject Name
+                    </li>
+                    <li className="basis-[13%] lg:basis-[15%] text-center">
+                      No. Cre
+                    </li>
+                    <li className="basis-[8%] text-center">Score</li>
+                    <li className="basis-[15%] lg:basis-[10%] text-center">
+                      Semester
+                    </li>
+                    <li className="basis-[21%] lg:basis-[15%] text-center ">
+                      Year
+                    </li>
+                    <li className="basis-[12%]  text-center">Action</li>
+                  </ul>
+                  {subjectList.map((item, index) => {
+                    return (
+                      <ul
+                        key={index}
+                        className={`h-[60px] ${
+                          item % 2 === 0
+                            ? "text-white bg-[rgba(0,0,0,0.3)] "
+                            : "bg-[rgba(255,255,255,.8)] text-black"
+                        }w-full flex items-center px-1 lg:px-5 mb-1 rounded-lg`}
+                      >
+                        <li className="basis-[6%] text-center">{item}</li>
+                        <li className="basis-[25%] lg:basis-[36%] text-center">
+                          Analyze and Design System
+                        </li>
+                        <li className="basis-[13%] lg:basis-[15%] text-center">
+                          3
+                        </li>
+                        <li className="basis-[8%] text-center">C</li>
+                        <li className="basis-[15%] lg:basis-[10%] text-center">
+                          1
+                        </li>
+                        <li className="basis-[21%] lg:basis-[15%] text-center">
+                          2023 - 2024
+                        </li>
+                        <li className="basis-[12%] flex gap-x-1 lg:gap-x-2 justify-center items-center ">
+                          <a className="cursor-pointer" href="/home/update/analize-and-design-system">
+                            <FaPenToSquare className="text-green-600 text-[32px]  p-2" />
+                          </a>{" "}
+                          <span className="opacity-70 text-white">|</span>{" "}
+                          <a className="cursor-pointer" href="/home/delete/analize-and-design-system">
+                            {" "}
+                            <FaRegWindowClose className="text-red-600 text-[32px] p-2" />
+                          </a>
+                        </li>
+                      </ul>
+                    );
+                  })}
+                </div>
               </div>
+
               <div className="w-full my-5 flex justify-center gap-x-5">
                 <button className="p-5  border-[1px] border-white border-solid rounded-full text-white bg-[rgba(0,0,0,.2)] hover:bg-[rgba(0,0,0,.4)]">
                   <FaArrowAltCircleLeft />
@@ -70,7 +91,7 @@ const Home = () => {
                 </button>
               </div>
             </div>
-            <div className={`w-full sm:w-1/3 flex flex-col gap-y-5`}>
+            <div className={`w-full lg:w-1/3 flex flex-col gap-y-5`}>
               <div className="flex flex-col items-center gap-y-5">
                 <div
                   className="w-[200px] h-[200px] rounded-full flex justify-center items-center"
@@ -120,6 +141,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <Sidebar />
     </div>
   );
 };

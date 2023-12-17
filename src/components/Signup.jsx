@@ -2,6 +2,7 @@ import BackgroundRectangle from "../assets/BackgroundRectangle.png";
 import { CiUser } from "react-icons/ci";
 import { IoLockClosedOutline } from "react-icons/io5";
 import { MdLockOutline } from "react-icons/md";
+import Footer from "./default_components/Footer";
 
 const Signup = () => {
   return (
@@ -80,11 +81,7 @@ const Signup = () => {
           </div>
         </div>
       </div>
-      <div
-        className={`absolute bottom-1 left-[50%] translate-x-[-50%] text-white`}
-      >
-        <p className="text-[12px]">Designed by Paul @2023</p>
-      </div>
+      <Footer />
     </div>
   );
 };
