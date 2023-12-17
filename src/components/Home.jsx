@@ -9,6 +9,7 @@ import Navbar from "./default_components/Navbar";
 import Sidebar from "./default_components/Sidebar";
 const subjectList = [1, 2, 3, 4, 5];
 const Home = () => {
+ 
   return (
     <div className="relative w-full min-h-screen overflow-scroll lg:h-screen lg:overflow-hidden bg-gradient-to-tr from-cyan-300 to-pink-600">
       <div
@@ -45,6 +46,7 @@ const Home = () => {
                   {subjectList.map((item, index) => {
                     return (
                       <ul
+                        data-aos={item % 2 === 0 ? "fade-right" : "fade-left"}
                         key={index}
                         className={`h-[60px] ${
                           item % 2 === 0
@@ -67,11 +69,17 @@ const Home = () => {
                           2023 - 2024
                         </li>
                         <li className="basis-[12%] flex gap-x-1 lg:gap-x-2 justify-center items-center ">
-                          <a className="cursor-pointer" href="/home/update/analize-and-design-system">
+                          <a
+                            className="cursor-pointer"
+                            href="/home/update/analize-and-design-system"
+                          >
                             <FaPenToSquare className="text-green-600 text-[32px]  p-2" />
                           </a>{" "}
                           <span className="opacity-70 text-white">|</span>{" "}
-                          <a className="cursor-pointer" href="/home/delete/analize-and-design-system">
+                          <a
+                            className="cursor-pointer"
+                            href="/home/delete/analize-and-design-system"
+                          >
                             {" "}
                             <FaRegWindowClose className="text-red-600 text-[32px] p-2" />
                           </a>
@@ -92,7 +100,7 @@ const Home = () => {
               </div>
             </div>
             <div className={`w-full lg:w-1/3 flex flex-col gap-y-5`}>
-              <div className="flex flex-col items-center gap-y-5">
+              <div data-aos="fade-up" className="flex flex-col items-center gap-y-5">
                 <div
                   className="w-[200px] h-[200px] rounded-full flex justify-center items-center"
                   style={{
@@ -108,7 +116,7 @@ const Home = () => {
                   rating
                 </p>
               </div>
-              <div className="px-5 flex flex-col gap-y-2 text-white">
+              <div data-aos="fade-up" className="px-5 flex flex-col gap-y-2 text-white">
                 <h2 className="w-full py-2 text-[20px]">Notifications</h2>
                 <p className="text-[12px]">
                   This website is being finalized, so if you have any feedback,

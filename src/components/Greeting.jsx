@@ -2,8 +2,6 @@ import GreetingBgDesktop from "../assets/GreetingBgPNGDesktop.png";
 import GreetingBgTablet from "../assets/GreetingBgPNGTablet.png";
 import logo from "../assets/logo.png";
 import Footer from "./default_components/Footer";
-console.log(window.innerHeight);
-console.log(window.innerWidth);
 const Greeting = () => {
   return (
     <div className="relative w-full h-screen overflow-hidden bg-gradient-to-tr from-cyan-300 to-pink-600">

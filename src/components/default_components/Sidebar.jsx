@@ -1,8 +1,17 @@
 import logo from "../../assets/logo.png";
 import { FaArrowAltCircleLeft } from "react-icons/fa";
+import { useContext } from "react";
+import { SidebarContext } from "../../contexts/sidbarContext";
 const Sidebar = () => {
+  const { isOpen, setIsOpen } = useContext(SidebarContext);
+
+  console.log(isOpen);
   return (
-    <div className="fixed top-0 left-0 w-4/5 h-screen bg-slate-700 px-5 py-20 hidden">
+    <div
+      className={`fixed top-0 w-4/5 h-screen overflow-hidden bg-slate-700 py-20 px-5 transition-all duration-500 ${
+        isOpen ? "left-0" : "left-[-100%]"
+      }`}
+    >
       <div className="flex justify-start items-center gap-x-2 mb-5">
         <img className="w-[50px] h-[40px]" src={logo} alt="logo brand" />
         <h2 className="text-white">Cumulative Points Calculator</h2>
@@ -30,7 +39,12 @@ const Sidebar = () => {
           Sign up
         </button>
       </div>
-      <div className="absolute top-4 left-4 w-[40px] h-[40px] border-[1px] border-solid border-white rounded-full flex justify-center items-center">
+      <div
+        onClick={() => {
+          setIsOpen(false);
+        }}
+        className="absolute top-4 left-4 w-[40px] h-[40px] border-[1px] border-solid border-white rounded-full flex justify-center items-center"
+      >
         <FaArrowAltCircleLeft className="text-white" />
       </div>
     </div>

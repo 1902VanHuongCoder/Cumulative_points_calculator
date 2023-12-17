@@ -1,6 +1,7 @@
 import GreetingBgPNGDesktop from "../assets/GreetingBgPNGDesktop.png";
 import Footer from "./default_components/Footer";
 import Navbar from "./default_components/Navbar";
+import Sidebar from "./default_components/Sidebar";
 const Gpa = () => {
   return (
     <div className="relative w-full min-h-screen bg-gradient-to-tr from-cyan-300 to-pink-600">
@@ -15,7 +16,7 @@ const Gpa = () => {
           </h1>
           <div className="w-full flex justify-center gap-x-10 flex-wrap">
             {/* parent */}
-            <div className="relative flex justify-evenly items-center mb-16 bg-[rgba(0,0,0,.3)] p-5 pt-10 rounded-sm gap-x-4">
+            <div data-aos="fade-up" className="relative flex justify-evenly items-center mb-16 bg-[rgba(0,0,0,.3)] p-5 pt-10 rounded-sm gap-x-4">
               {/* item  */}
               <h2 className="absolute top-[-20px] text-black sm:text-[16px] bg-white px-4 py-2 rounded-lg">
                 2023 - 2024
@@ -61,7 +62,7 @@ const Gpa = () => {
               </div>
             </div>
 
-            <div className="relative flex justify-evenly items-center mb-16 bg-[rgba(0,0,0,.3)] p-5 pt-10 rounded-sm gap-x-4">
+            <div data-aos="fade-up" className="relative flex justify-evenly items-center mb-16 bg-[rgba(0,0,0,.3)] p-5 pt-10 rounded-sm gap-x-4">
               {/* item  */}
               <h2 className="absolute top-[-20px] text-black sm:text-[16px] bg-white px-4 py-2 rounded-lg">
                 2023 - 2024
@@ -107,7 +108,7 @@ const Gpa = () => {
               </div>
             </div>
 
-            <div className="relative flex justify-evenly items-center mb-16 bg-[rgba(0,0,0,.3)] p-5 pt-10 rounded-sm gap-x-4">
+            <div data-aos="fade-up" className="relative flex justify-evenly items-center mb-16 bg-[rgba(0,0,0,.3)] p-5 pt-10 rounded-sm gap-x-4">
               {/* item  */}
               <h2 className="absolute top-[-20px] text-black sm:text-[16px] bg-white px-4 py-2 rounded-lg">
                 2023 - 2024
@@ -153,7 +154,7 @@ const Gpa = () => {
               </div>
             </div>
 
-            <div className="relative flex justify-evenly items-center mb-16 bg-[rgba(0,0,0,.3)] p-5 pt-10 rounded-sm gap-x-4">
+            <div data-aos="fade-up" className="relative flex justify-evenly items-center mb-16 bg-[rgba(0,0,0,.3)] p-5 pt-10 rounded-sm gap-x-4">
               {/* item  */}
               <h2 className="absolute top-[-20px] text-black sm:text-[16px] bg-white px-4 py-2 rounded-lg">
                 2023 - 2024
@@ -203,6 +204,7 @@ const Gpa = () => {
 
         <Footer />
       </div>
+      <Sidebar />
     </div>
   );
 };
