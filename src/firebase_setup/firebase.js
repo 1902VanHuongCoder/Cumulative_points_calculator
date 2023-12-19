@@ -4,13 +4,13 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB4WmvbpLvN4VB9VXOKXDuzvpAI9hU2pFw",
-  authDomain: "cumulative-points-calcul-73190.firebaseapp.com",
-  projectId: "cumulative-points-calcul-73190",
-  storageBucket: "cumulative-points-calcul-73190.appspot.com",
-  messagingSenderId: "995137744269",
-  appId: "1:995137744269:web:0ea304473383e4be3b61c4",
-  measurementId: "G-PSSDZ70MMY",
+  apiKey: import.meta.env.VITE_API_KEY,
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGE_SENDER_ID,
+  appId: import.meta.env.VITE_APP_ID,
+  measurementId: import.meta.env.VITE_MEASUREMENT_ID,
 };
 
 // Initialize Firebase

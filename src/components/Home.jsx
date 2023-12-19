@@ -7,15 +7,109 @@ import { FaRegWindowClose } from "react-icons/fa";
 import { FaPenToSquare } from "react-icons/fa6";
 import Navbar from "./default_components/Navbar";
 import Sidebar from "./default_components/Sidebar";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
+import { LoadingContext } from "../contexts/loadingContext";
+import { db } from "../firebase_setup/firebase";
+import { useNavigate } from "react-router-dom";
 import { NotificationsContext } from "../contexts/notificationContext";
-const subjectList = [1, 2, 3, 4, 5];
 const Home = () => {
+  const { setIsLoading } = useContext(LoadingContext);
   const { setIsShow, setContent, setType } = useContext(NotificationsContext);
-  const testNotify = () => {
-    setContent("Add success fulllyy!");
-    setType("success");
+  const [subjectsDatas, setSubjectsDatas] = useState([]);
+  const [currentSection, setCurrentSection] = useState(1);
+
+  console.log(subjectsDatas);
+  const fetchSubjectsDatas = async () => {
+    var err = false;
+    setIsLoading(true);
+    try {
+      await getDocs(collection(db, "subjects")).then((response) => {
+        const dataResponsed = response.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        setSubjectsDatas(dataResponsed);
+      });
+    } catch (error) {
+      err = true;
+      console.log(error);
+    }
+
+    if (!err) {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchSubjectsDatas();
+  }, []);
+
+  var sliceArray = subjectsDatas.slice(
+    currentSection * 5 - 5,
+    currentSection * 5
+  );
+
+  const calculatePoint = () => {
+    let cumulativePoint = 0;
+    let totalPoint = 0;
+    let numberOfCredit = 0;
+    if (subjectsDatas.length > 0) {
+      subjectsDatas.forEach((element) => {
+        if (!element.prerequisite && !element.physicalEducation) {
+          numberOfCredit += element.no_cre;
+          if (element.score === "A") {
+            totalPoint += 4 * element.no_cre;
+          } else if (element.score === "B+") {
+            totalPoint += 3.5 * element.no_cre;
+          } else if (element.score === "B") {
+            totalPoint += 3 * element.no_cre;
+          } else if (element.score === "C+") {
+            totalPoint += 2.5 * element.no_cre;
+          } else if (element.score === "C") {
+            totalPoint += 2 * element.no_cre;
+          } else if (element.score === "D+") {
+            totalPoint += 1.5 * element.no_cre;
+          } else if (element.score === "D") {
+            totalPoint += 1 * element.no_cre;
+          } else {
+            totalPoint += 0 * element.no_cre;
+          }
+        }
+      });
+    }
+    cumulativePoint = (totalPoint / numberOfCredit).toFixed(2);
+    return cumulativePoint;
+  };
+  const navigate = useNavigate();
+  const hanleRedirectToUpdatePage = (id) => {
+    const subject = subjectsDatas.filter((subj) => subj.id === id);
+    navigate(`/update/${id}`, {
+      state: subject[0],
+    });
+  };
+
+  const handleDeleteSubject = async (id) => {
+    // setIsLoading(true);
+    let err = false;
+    try {
+      await deleteDoc(doc(db, "subjects", id));
+    } catch (error) {
+      err = true;
+      console.log(error);
+    }
     setIsShow(true);
+    if (!err) {
+      setType("success");
+      setContent("Deleted subject successfully");
+      setIsLoading(false);
+      window.location.reload();
+    } else {
+      setType("fail");
+      setContent("Deleting subject failed");
+      setIsLoading(false);
+      window.location.reload();
+    }
   };
   return (
     <div className="relative w-full min-h-screen overflow-scroll lg:h-screen lg:overflow-hidden bg-gradient-to-tr from-cyan-300 to-pink-600">
@@ -50,46 +144,45 @@ const Home = () => {
                     </li>
                     <li className="basis-[12%]  text-center">Action</li>
                   </ul>
-                  {subjectList.map((item, index) => {
+                  {sliceArray.map((subject, index) => {
                     return (
                       <ul
                         data-aos="flip-down"
-                        key={index}
+                        key={subject.id}
                         className={`h-[60px] ${
-                          item % 2 === 0
+                          (index + 1) % 2 === 0
                             ? "text-white bg-[rgba(0,0,0,0.3)] "
                             : "bg-[rgba(255,255,255,.8)] text-black"
                         }w-full flex items-center px-1 lg:px-5 mb-1 rounded-lg`}
                       >
-                        <li className="basis-[6%] text-center">{item}</li>
+                        <li className="basis-[6%] text-center">{index + 1}</li>
                         <li className="basis-[25%] lg:basis-[36%] text-center">
-                          Analyze and Design System
+                          {subject.subject_name}
                         </li>
                         <li className="basis-[13%] lg:basis-[15%] text-center">
-                          3
+                          {subject.no_cre}
                         </li>
-                        <li className="basis-[8%] text-center">C</li>
+                        <li className="basis-[8%] text-center">
+                          {subject.score}
+                        </li>
                         <li className="basis-[15%] lg:basis-[10%] text-center">
-                          1
+                          {subject.semester}
                         </li>
                         <li className="basis-[21%] lg:basis-[15%] text-center">
-                          2023 - 2024
+                          {subject.year}
                         </li>
                         <li className="basis-[12%] flex gap-x-1 lg:gap-x-2 justify-center items-center ">
-                          <a
-                            className="cursor-pointer"
-                            href="/home/update/analize-and-design-system"
-                          >
-                            <FaPenToSquare className="text-green-600 text-[32px]  p-2" />
-                          </a>{" "}
+                          <FaPenToSquare
+                            onClick={() =>
+                              hanleRedirectToUpdatePage(subject.id)
+                            }
+                            className="text-green-600 text-[32px]  p-2 cursor-pointer"
+                          />
                           <span className="opacity-70 text-white">|</span>{" "}
-                          <a
-                            className="cursor-pointer"
-                            href="/home/delete/analize-and-design-system"
-                          >
-                            {" "}
-                            <FaRegWindowClose className="text-red-600 text-[32px] p-2" />
-                          </a>
+                          <FaRegWindowClose
+                            onClick={() => handleDeleteSubject(subject.id)}
+                            className="text-red-600 text-[32px] p-2 cursor-pointer"
+                          />
                         </li>
                       </ul>
                     );
@@ -97,14 +190,28 @@ const Home = () => {
                 </div>
               </div>
 
-              <div className="w-full my-5 flex justify-center gap-x-5">
-                <button className="p-5  border-[1px] border-white border-solid rounded-full text-white bg-[rgba(0,0,0,.2)] hover:bg-[rgba(0,0,0,.4)]">
-                  <FaArrowAltCircleLeft />
-                </button>
-                <button className="p-5 border-[1px] border-white border-solid rounded-full text-white bg-transparent hover:bg-[rgba(255,255,255,.2)]">
-                  <FaArrowAltCircleRight />
-                </button>
-              </div>
+              {subjectsDatas.length > 5 && (
+                <div className="w-full my-5 flex justify-center gap-x-5">
+                  <button
+                    disabled={currentSection < 2 ? true : false}
+                    onClick={() => setCurrentSection((pre) => pre - 1)}
+                    className="disabled:opacity-50 disabled:hover:bg-[rgba(0,0,0,.2)] p-5  border-[1px] border-white border-solid rounded-full text-white bg-[rgba(0,0,0,.2)] hover:bg-[rgba(0,0,0,.4)]"
+                  >
+                    <FaArrowAltCircleLeft />
+                  </button>
+                  <button
+                    disabled={
+                      currentSection === Math.ceil(subjectsDatas.length / 5)
+                        ? true
+                        : false
+                    }
+                    onClick={() => setCurrentSection((pre) => pre + 1)}
+                    className="disabled:opacity-50 disabled:hover:bg-transparent p-5 border-[1px] border-white border-solid rounded-full text-white bg-transparent hover:bg-[rgba(255,255,255,.2)]"
+                  >
+                    <FaArrowAltCircleRight />
+                  </button>
+                </div>
+              )}
             </div>
             <div className={`w-full lg:w-1/3 flex flex-col gap-y-5`}>
               <div
@@ -118,11 +225,19 @@ const Home = () => {
                   }}
                 >
                   <div className="w-[180px] h-[180px] bg-white rounded-full flex justify-center items-center shadow-inner">
-                    <h2 className="text-5xl">3.36</h2>
+                    <h2 className="text-5xl">
+                      {subjectsDatas.length > 0 ? calculatePoint() : "0.00"}
+                    </h2>
                   </div>
                 </div>
                 <p className="text-white">
-                  <span className="text-[20px] text-[#fbfe4e]">Excellent</span>{" "}
+                  <span className="text-[20px] text-[#fbfe4e]">
+                    {calculatePoint() > 3.6
+                      ? "Excellent"
+                      : calculatePoint() > 3.2
+                      ? "Very good"
+                      : "Good"}
+                  </span>{" "}
                   rating
                 </p>
               </div>

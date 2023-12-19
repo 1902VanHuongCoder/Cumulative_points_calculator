@@ -13,6 +13,7 @@ import HashLoader from "react-spinners/HashLoader";
 import { LoadingContext } from "./contexts/loadingContext";
 import Notifications from "./components/default_components/Notifications";
 import { NotificationsContext } from "./contexts/notificationContext";
+import Updatesubject from "./components/Updatesubject";
 function App() {
   const { isLoading } = useContext(LoadingContext);
   const { isShow, content, type } = useContext(NotificationsContext);
@@ -26,6 +27,7 @@ function App() {
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/greeting" element={<Greeting />}></Route>
         <Route path="/addsubject" element={<Addsubject />}></Route>
+        <Route path="/update/*" element={<Updatesubject />}></Route>
         <Route path="/gpa" element={<Gpa />}></Route>
         <Route path="/" element={<Home />}></Route>
         <Route path="/home" element={<Home />}></Route>

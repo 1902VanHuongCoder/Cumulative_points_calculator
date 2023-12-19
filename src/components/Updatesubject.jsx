@@ -7,11 +7,12 @@ import Navbar from "./default_components/Navbar";
 import Footer from "./default_components/Footer";
 import Sidebar from "./default_components/Sidebar";
 import { db } from "../firebase_setup/firebase";
-import { addDoc, collection } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 import { useForm } from "react-hook-form";
 import { LoadingContext } from "../contexts/loadingContext";
 import { NotificationsContext } from "../contexts/notificationContext";
-const Addsubject = () => {
+import { useLocation } from "react-router-dom";
+const Updatesubject = () => {
   const { setIsLoading } = useContext(LoadingContext);
   const { setIsShow, setContent, setType } = useContext(NotificationsContext);
   const {
@@ -22,22 +23,30 @@ const Addsubject = () => {
   } = useForm();
   const [semesterDropdownIsOpen, setSemesterDropdownIsOpen] = useState(false);
   const [yearDropdownIsOpen, setYearDropDownIsOpen] = useState(false);
-
-  const handleAddSubject = async (data) => {
-    let subjectCode = data.subject_code.toUpperCase();
-    let score = data.score.toUpperCase();
+  const { state } = useLocation();
+  const [subjectName, setSubjectName] = useState(state.subject_name);
+  const [noCre, setNoCre] = useState(state.no_cre);
+  const [subjectCode, setSubjectCode] = useState(state.subject_code);
+  const [score, setScore] = useState(state.score);
+  const [semester, setSemester] = useState(state.semester);
+  const [year, setYear] = useState(state.year);
+  const [prerequisite, setPreRequisite] = useState(state.prerequisite);
+  const [physicalEducation, setPhysicalEducation] = useState(state.physicalEducation);
+  const onUpdateSubject = async (data) => {
+    let subjectCodeUpper = subjectCode.toUpperCase();
+    let scoreUpperCase = score.toUpperCase();
     let state = true;
     setIsLoading(true);
     try {
-      await addDoc(collection(db, "subjects"), {
-        no_cre: parseInt(data.no_cre),
-        score: score,
-        semester: data.semester,
-        subject_code: subjectCode,
-        subject_name: data.subject_name,
-        year: data.year,
-        prerequisite: data.prerequisite,
-        physicalEducation: data.physicaledu,
+      await updateDoc(doc(db, "subjects", data.subject_id), {
+        no_cre: parseInt(noCre),
+        score: scoreUpperCase,
+        semester: semester,
+        subject_code: subjectCodeUpper,
+        subject_name: subjectName,
+        year: year,
+        prerequisite: prerequisite,
+        physicalEducation: physicalEducation,
       });
     } catch (error) {
       state = false;
@@ -46,14 +55,16 @@ const Addsubject = () => {
     setIsShow(true);
     if (state) {
       setType("success");
-      setContent("Added subject successfully");
+      setContent("Updated subject successfully");
       setIsLoading(false);
       reset();
     } else {
       setType("fail");
-      setContent("Adding subject failed");
+      setContent("Updating subject failed");
+      setIsLoading(false);
     }
   };
+
   return (
     <div className="relative w-full min-h-screen bg-gradient-to-tr from-cyan-300 to-pink-600">
       <div
@@ -63,7 +74,7 @@ const Addsubject = () => {
         <Navbar />
         <form method="POST" className="w-4/5 sm:w-3/5 mx-auto">
           <h1 className="w-full text-center text-[24px] font-semibold text-white py-5">
-            Add Subject
+            Update Subject
           </h1>
           <div className="w-full mb-10">
             <div className="flex flex-col sm:flex-row gap-y-5 gap-x-5 mb-5">
@@ -75,12 +86,12 @@ const Addsubject = () => {
                   Subject name <span className="text-red-500">*</span>
                 </label>
                 <input
+                  value={subjectName}
+                  onChange={(e) => setSubjectName(e.target.value)}
                   name="subject_name"
                   id="subject_name"
                   maxLength={40}
-                  {...register("subject_name", {
-                    required: "This field is required!",
-                  })}
+                  
                   type="text"
                   className="h-[40px] w-full outline-none bg-white border-[1px] border-solid border-[rgba(0,0,0,.5)] px-5 text-black rounded-sm focus:border-[rgba(0,0,0,1)]"
                 />
@@ -93,14 +104,14 @@ const Addsubject = () => {
                   No. cre <span className="text-red-500">*</span>
                 </label>
                 <input
+                  value={noCre}
+                  onChange={(e) => setNoCre(e.target.value)}
                   name="no_cre"
                   id="no_cre"
                   maxLength={1}
                   min={1}
                   max={9}
-                  {...register("no_cre", {
-                    required: "This field is required!",
-                  })}
+                  
                   type="number"
                   className="h-[40px] w-full outline-none bg-white border-[1px] border-solid border-[rgba(0,0,0,.5)] pl-5 pr-2 text-black rounded-sm focus:border-[rgba(0,0,0,1)]"
                 />
@@ -119,12 +130,12 @@ const Addsubject = () => {
                   Subject code <span className="text-red-500">*</span>
                 </label>
                 <input
+                  value={subjectCode}
+                  onChange={(e) => setSubjectCode(e.target.value)}
                   name="subject_code"
                   id="subject_code"
                   maxLength={5}
-                  {...register("subject_code", {
-                    required: "This field is required!",
-                  })}
+                  
                   type="text"
                   className="h-[40px] w-full outline-none bg-white border-[1px] border-solid border-[rgba(0,0,0,.5)] px-5 text-black rounded-sm focus:border-[rgba(0,0,0,1)]"
                 />
@@ -140,7 +151,8 @@ const Addsubject = () => {
                   name="score"
                   id="score"
                   type="text"
-                  {...register("score")}
+                  value={score}
+                  onChange={(e) => setScore(e.target.value)}
                   maxLength={2}
                   className="h-[40px] w-full outline-none bg-white border-[1px] border-solid border-[rgba(0,0,0,.5)] px-5 text-black rounded-sm focus:border-[rgba(0,0,0,1)]"
                 />
@@ -156,9 +168,10 @@ const Addsubject = () => {
                   Semester <span className="text-red-500">*</span>
                 </label>
                 <select
+                  value={semester}
                   name="semester"
                   id="semester"
-                  {...register("semester")}
+                  onChange={(e) => setSemester(e.target.value)}
                   onClick={() => {
                     setSemesterDropdownIsOpen(!semesterDropdownIsOpen);
                   }}
@@ -188,9 +201,10 @@ const Addsubject = () => {
                   Year <span className="text-red-500">*</span>
                 </label>{" "}
                 <select
+                  value={year}
                   name="year"
                   id="year"
-                  {...register("year")}
+                  onChange={(e) => setYear(e.target.value)}
                   onClick={() => {
                     setYearDropDownIsOpen(!yearDropdownIsOpen);
                   }}
@@ -225,11 +239,12 @@ const Addsubject = () => {
             <div className="flex gap-x-5">
               <div className="flex items-center gap-x-2">
                 <input
+                  checked={prerequisite}
                   className="h-5 w-5"
                   type="checkbox"
                   name="prerequisite"
                   id="prerequisite"
-                  {...register("prerequisite")}
+                  onChange={(e) => setPreRequisite(e.target.value)}
                 />
                 <label htmlFor="prerequisite" className="text-white">
                   {" "}
@@ -238,25 +253,33 @@ const Addsubject = () => {
               </div>
               <div className="flex items-center gap-x-2">
                 <input
+                  checked={physicalEducation}
                   className="h-5 w-5"
                   type="checkbox"
                   name="physicaledu"
                   id="physicaledu"
-                  {...register("physicaledu")}
+                  onChange={(e) => setPhysicalEducation(e.target.value)}
                 />
                 <label htmlFor="physicaledu" className="text-white">
                   {" "}
                   Physical education <span className="text-red-500">*</span>
                 </label>
+                <input
+                  type="hidden"
+                  id="subject_id"
+                  name="subject_id"
+                  value={state && state.id}
+                  {...register('subject_id')}
+                />
               </div>
             </div>
           </div>
           <div className="w-full  flex justify-end">
             <button
-              onClick={handleSubmit(handleAddSubject)}
+              onClick={handleSubmit(onUpdateSubject)}
               className="bg-white w-[150px] rounded-full flex justify-center items-center h-[40px] gap-x-2 shadow-md"
             >
-              ADD <img src={rocketIcon} />
+              UPDATE <img src={rocketIcon} />
             </button>
           </div>
         </form>
@@ -267,4 +290,4 @@ const Addsubject = () => {
   );
 };
 
-export default Addsubject;
+export default Updatesubject;

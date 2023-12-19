@@ -7,7 +7,7 @@ const Notifications = ({ show, type, content }) => {
     const {setIsShow} = useContext(NotificationsContext);
   return (
     <div
-      className={`absolute top-5 right-0 w-fit h-[60px] px-5 ${
+      className={`fixed top-5 right-0 w-fit h-[60px] px-5 ${
         show ? "translate-x-[-30px]" : "translate-x-[150%]"
       } ${type === "success" && "bg-green-500"} ${
         type === "fail" && "bg-red-500"
