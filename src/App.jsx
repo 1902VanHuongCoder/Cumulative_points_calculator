@@ -22,7 +22,7 @@ function App() {
   }, []);
   return (
     <div className="relative w-full overflow-x-hidden">
-      {/* <Routes className="bg-red-700">
+      <Routes className="bg-red-700">
         <Route path="/login" element={<Login />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/greeting" element={<Greeting />}></Route>
@@ -31,7 +31,7 @@ function App() {
         <Route path="/gpa" element={<Gpa />}></Route>
         <Route path="/" element={<Home />}></Route>
         <Route path="/home" element={<Home />}></Route>
-      </Routes> */}
+      </Routes>
       Hello 
       <div
         className={`fixed top-0 left-0 ${
