@@ -1,7 +1,7 @@
 import GreetingBgPNGDesktop from "../assets/GreetingBgPNGDesktop.png";
 import SelectArrowUp from "../assets/SelectArrowUp.png";
 import SelectArrowDown from "../assets/SelectArrowDown.png";
-import rocketIcon from "../assets/rocket.png";
+import rocketIcon from "../assets/roRocket.png";
 import { useContext, useState } from "react";
 import Navbar from "./default_components/Navbar";
 import Footer from "./default_components/Footer";
