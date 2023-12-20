@@ -1,4 +1,3 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
@@ -7,7 +6,7 @@ import SidebarProvider from "./contexts/sidbarContext.jsx";
 import LoadingProvider from "./contexts/loadingContext.jsx";
 import NotificationsProvider from "./contexts/notificationContext.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+
     <BrowserRouter>
       <SidebarProvider>
         <LoadingProvider>
@@ -17,5 +16,4 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         </LoadingProvider>
       </SidebarProvider>
     </BrowserRouter>
-  </React.StrictMode>
 );

@@ -13,6 +13,7 @@ import { LoadingContext } from "../contexts/loadingContext";
 import { db } from "../firebase_setup/firebase";
 import { useNavigate } from "react-router-dom";
 import { NotificationsContext } from "../contexts/notificationContext";
+import letterToNumericalGrades from "../helpers/letterToNumericalGrades";
 const Home = () => {
   const { setIsLoading } = useContext(LoadingContext);
   const { setIsShow, setContent, setType } = useContext(NotificationsContext);
@@ -58,23 +59,8 @@ const Home = () => {
       subjectsDatas.forEach((element) => {
         if (!element.prerequisite && !element.physicalEducation) {
           numberOfCredit += element.no_cre;
-          if (element.score === "A") {
-            totalPoint += 4 * element.no_cre;
-          } else if (element.score === "B+") {
-            totalPoint += 3.5 * element.no_cre;
-          } else if (element.score === "B") {
-            totalPoint += 3 * element.no_cre;
-          } else if (element.score === "C+") {
-            totalPoint += 2.5 * element.no_cre;
-          } else if (element.score === "C") {
-            totalPoint += 2 * element.no_cre;
-          } else if (element.score === "D+") {
-            totalPoint += 1.5 * element.no_cre;
-          } else if (element.score === "D") {
-            totalPoint += 1 * element.no_cre;
-          } else {
-            totalPoint += 0 * element.no_cre;
-          }
+          totalPoint += letterToNumericalGrades(element.score) * element.no_cre;
+          // letterToNumericalGrades is an function to convert score from letter to numerical (for example: A -> 4,...)
         }
       });
     }
