@@ -1,5 +1,5 @@
 import SquaresBgPNG from "../assets/SquaresBgPNG.png";
-import githubIcon from "../assets/githubicon.png";
+import githubIcon from "../assets/githubIcon.png";
 import instagramIcon from "../assets/instagramIcon.png";
 import facebookIcon from "../assets/facebookIcon.png";
 import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from "react-icons/fa";
