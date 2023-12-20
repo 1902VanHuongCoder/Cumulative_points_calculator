@@ -32,7 +32,6 @@ function App() {
         <Route path="/Cumulative_points_calculator" element={<Home />}></Route>
         <Route path="/Cumulative_points_calculator/home" element={<Home />}></Route>
       </Routes>
-      Hello 
       <div
         className={`fixed top-0 left-0 ${
           isLoading ? "block" : "hidden"
@@ -51,4 +50,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; 
