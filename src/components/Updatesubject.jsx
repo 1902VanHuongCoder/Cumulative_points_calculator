@@ -22,8 +22,11 @@ const Updatesubject = () => {
     reset,
   } = useForm();
   const [semesterDropdownIsOpen, setSemesterDropdownIsOpen] = useState(false);
+
   const [yearDropdownIsOpen, setYearDropDownIsOpen] = useState(false);
+
   const { state } = useLocation();
+
   const [subjectName, setSubjectName] = useState(state.subject_name);
   const [noCre, setNoCre] = useState(state.no_cre);
   const [subjectCode, setSubjectCode] = useState(state.subject_code);
@@ -32,6 +35,10 @@ const Updatesubject = () => {
   const [year, setYear] = useState(state.year);
   const [prerequisite, setPreRequisite] = useState(state.prerequisite);
   const [physicalEducation, setPhysicalEducation] = useState(state.physicalEducation);
+
+  console.log("Prerequire:" + prerequisite);
+  console.log("PhysicalEducation:" + physicalEducation);
+
   const onUpdateSubject = async (data) => {
     let subjectCodeUpper = subjectCode.toUpperCase();
     let scoreUpperCase = score.toUpperCase();
@@ -239,7 +246,6 @@ const Updatesubject = () => {
             <div className="flex gap-x-5">
               <div className="flex items-center gap-x-2">
                 <input
-                  checked={prerequisite}
                   className="h-5 w-5"
                   type="checkbox"
                   name="prerequisite"
@@ -253,7 +259,6 @@ const Updatesubject = () => {
               </div>
               <div className="flex items-center gap-x-2">
                 <input
-                  checked={physicalEducation}
                   className="h-5 w-5"
                   type="checkbox"
                   name="physicaledu"
